@@ -1,3 +1,4 @@
+# jobs/utils.py 
 from fuzzywuzzy import fuzz
 from django.db.models import Q
 
@@ -19,7 +20,6 @@ def search_with_aprox(keyword, queryset):
     # Combine and return results as a QuerySet
     results.extend(fuzzy_results)
     return queryset.filter(pk__in=[ind.pk for ind in results])
-
 
 def search_without_aprox(keyword, queryset):
     filter_data = queryset.filter(

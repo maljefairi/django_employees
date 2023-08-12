@@ -1,0 +1,66 @@
+{% extends "jobs/base.html" %}
+
+{% block content %}
+<h1>Job Descriptions Management</h1>
+<h2>Job Description Details</h2>
+
+<div>
+    <strong>Job title:</strong> {{ job_description.job_title }}
+</div>
+
+<div>
+    <strong>Grade:</strong> {{ job_description.grade }}
+</div>
+
+<div>
+    <strong>Code:</strong> {{ job_description.code }}
+</div>
+
+<div>
+    <strong>Group type:</strong> {{ job_description.group_type }}
+</div>
+
+<div>
+    <strong>General group:</strong> {{ job_description.general_group }}
+</div>
+
+<div>
+    <strong>Job location:</strong> {{ job_description.job_location }}
+</div>
+
+<div>
+    <strong>Job responsibilities:</strong> {{ job_description.responsibilities }}
+</div>
+
+<div>
+    <strong>Job objectives:</strong> {{ job_description.objectives }}
+</div>
+
+<div>
+    <strong>Job requirements:</strong> {{ job_description.requirements }}
+</div>
+
+<div>
+    <strong>Description:</strong> {{ job_description.description }}
+</div>
+
+<div>
+    <strong>Generated:</strong> {{ job_description.generated }}
+</div>
+
+<div>
+    <strong>Objectives:</strong> {{ job_description.objectives_details }}
+</div>
+
+<div>
+    <strong>Skills:</strong> {{ job_description.skills }}
+</div>
+
+<div>
+    <strong>Training:</strong> {{ job_description.training }}
+</div>
+
+<a href="{% url 'job_description_edit' job_description.id %}" class="btn btn-primary">Edit</a>
+<a href="{% url 'job_description_delete' job_description.id %}" class="btn btn-danger">Delete</a>
+<a href="{% url 'job_description_list' %}" class="btn btn-secondary">Back to List</a>
+{% endblock %}

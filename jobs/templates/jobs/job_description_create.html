@@ -1,0 +1,14 @@
+(extends "jobs/base.html" %)
+    
+    {% block content %}
+    <h1>{% if form.instance.id %}Edit{% else %}Create{% endif %} Job Description</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+
+    <a href="{% url 'job_description_list' %}">Back to List</a>
+    {% endblock %}
+    

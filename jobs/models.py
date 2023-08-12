@@ -1,4 +1,4 @@
-# models.py
+# jobs/models.py
 from django.db import models
 
 class JobTitle(models.Model):

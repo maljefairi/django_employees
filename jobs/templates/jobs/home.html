@@ -1,0 +1,17 @@
+{% extends "jobs/base.html" %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center">
+                <h1>Welcome to the Job Descriptions Portal</h1>
+                <p class="lead">
+                    Browse through various job descriptions, add new ones, and manage existing job profiles.
+                </p>
+                <a href="{% url 'job_description_list' %}" class="btn btn-primary mt-3">
+                    View Job Descriptions
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

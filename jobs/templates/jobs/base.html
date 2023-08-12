@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Descriptions Management</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        .custom-container {
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 85%;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h2 class="text-secondary text-center p-2" style="background-color:#e9ecef">Job Descriptions Management</h2>
+    </header>
+
+    <main class="container mt-3 custom-container">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Any global scripts can be linked here -->
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+
+</html>
