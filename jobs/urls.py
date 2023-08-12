@@ -4,7 +4,7 @@ from . import views
 
 urlpatterns = [
     path('job/', views.job_description_list,  name='job_description_list'),
-    path('job/<uuid:pk>/', views.JobDescriptionDetailView.as_view(),
+    path('job/<uuid:pk>/', views.job_description_detail,
          name='job_description_detail'),
     path('job/new/', views.job_description_create,
          name='job_description_create'),

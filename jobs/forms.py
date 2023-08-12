@@ -39,8 +39,9 @@ class JobForm(forms.ModelForm):
         self.fields['code3'].initial = codes[2] if len(codes) > 2 else ''
         self.fields['code4'].initial = codes[3] if len(codes) > 3 else ''
         # add form-control class to all input fields
-        for field in self.fields:
-            self.fields[field].widget.attrs['class'] = 'form-control'
+        for name in self.fields:
+            field: forms.Field = self.fields[name]
+            field.widget.attrs['class'] = 'form-control'
 
     def save(self, commit=True):
         instance = super().save(commit=False)

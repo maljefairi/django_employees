@@ -63,7 +63,7 @@ def job_description_list(request: HttpRequest):
 
 def job_description_detail(request: HttpRequest, pk):
     job_description = get_object_or_404(Job, pk=pk)
-    context = {'form': job_description}
+    context = {'job_description': job_description}
     return render(request, 'jobs/job_description_detail.html', context)
 
 
