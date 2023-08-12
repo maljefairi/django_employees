@@ -1,12 +1,13 @@
+{% load crispy_forms_tags %}
 {% extends "jobs/base.html" %}
 
 {% block content %}
 <div class="container mt-5">
     <h1>
         {% if form.instance.id %}
-            Edit
+        Edit
         {% else %}
-            Create
+        Create
         {% endif %}
         Job Description
     </h1>
@@ -15,21 +16,21 @@
         {% csrf_token %}
 
         {% for field in form %}
-            <div class="form-group{% if field.errors %} has-error{% endif %}">
-                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                
-                {{ field|add_class:"form-control" }}
+        <div class="form-group{% if field.errors %} has-error{% endif %}">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
 
-                {% if field.help_text %}
-                    <small id="{{ field.id_for_label }}-help" class="form-text text-muted">{{ field.help_text }}</small>
-                {% endif %}
+            {{ field|add_class:"form-control" }}
 
-                {% for error in field.errors %}
-                    <div class="alert alert-danger" role="alert">
-                        {{ error }}
-                    </div>
-                {% endfor %}
+            {% if field.help_text %}
+            <small id="{{ field.id_for_label }}-help" class="form-text text-muted">{{ field.help_text }}</small>
+            {% endif %}
+
+            {% for error in field.errors %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
             </div>
+            {% endfor %}
+        </div>
         {% endfor %}
 
         <div class="form-actions">

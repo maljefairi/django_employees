@@ -1,16 +1,17 @@
+{% load crispy_forms_tags %}
 {% extends "jobs/base.html" %}
 
 {% block content %}
-    <div class="row justify-content-center">
-        <div class="col-md-8 text-center">
-            <h1 class="display-4">Welcome to the Job Descriptions Portal</h1>
-            <p class="lead mt-4">
-                Browse through various job descriptions, add new ones, and manage existing job profiles.
-            </p>
-            <a href="{% url 'job_description_list' %}" class="btn btn-primary btn-lg mt-4">
-                View Job Descriptions
-            </a>
-            <a href="/" class="btn btn-secondary btn-lg mt-4">Go Back to Main Index Page</a> <!-- Added this button -->
-        </div>
+<div class="row justify-content-center">
+    <div class="col-md-8 text-center">
+        <h1 class="display-4">Welcome to the Job Descriptions Portal</h1>
+        <p class="lead mt-4">
+            Browse through various job descriptions, add new ones, and manage existing job profiles.
+        </p>
+        <a href="{% url 'job_description_list' %}" class="btn btn-primary btn-lg mt-4">
+            View Job Descriptions
+        </a>
+        <a href="/" class="btn btn-secondary btn-lg mt-4">Go Back to Main Index Page</a> <!-- Added this button -->
     </div>
+</div>
 {% endblock %}

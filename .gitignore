@@ -145,3 +145,6 @@ static/*
 
 # face images folder
 face_images/*
+
+*.sqlite3
+*.db
