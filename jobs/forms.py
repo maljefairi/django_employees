@@ -22,7 +22,7 @@ class JobForm(forms.ModelForm):
         fields = [
             'title', 'grade', 'group_type', 'general_group',
             'job_location', 'job_responsibilities', 'job_objectives',
-            'description', 'generated', 'objectives', 'skills', 'training',
+            'job_requirements', 'description', 'generated', 'objectives', 'skills', 'training',
         ]
 
     def __init__(self, *args, **kwargs):
@@ -64,3 +64,6 @@ class JobFilterForm(forms.Form):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = False
+
+        for field in self.fields:
+            self.fields[field].widget.attrs['class'] = 'form-control'

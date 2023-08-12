@@ -87,7 +87,7 @@ def job_description_edit(request: HttpRequest, pk):
 
 
 def job_description_delete(request: HttpRequest, pk):
-    queryset: Job = get_object_or_404(JobForm, pk=pk)
+    queryset: Job = get_object_or_404(Job, pk=pk)
     if request.method == "POST":
         queryset.delete()
         return redirect('job_description_list')

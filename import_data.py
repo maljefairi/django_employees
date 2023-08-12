@@ -15,6 +15,11 @@ def load_data():
         total_updated = 0
 
         for item in data:
+            if item["job_title"].strip() == "":
+                continue
+            requirements = ""
+            for r in item["job_requirements"]:
+                requirements += f'{r["degree"]} ({r["experience"]})\n'
 
             job_description_instance, created = Job.objects.get_or_create(
                 title=item["job_title"],
@@ -27,7 +32,7 @@ def load_data():
                     'job_location': item["job_location"],
                     'job_responsibilities': item["job_responsibilities"],
                     'job_objectives': "\n".join(item["job_objectives"]),
-                    'job_requirements': item["job_requirements"],
+                    'job_requirements': requirements,
                     'generated': item["generated"],
                     'objectives': item["objectives"],
                     'skills': item["skills"],

@@ -13,16 +13,14 @@ class Job(models.Model):
     group_type = models.CharField(max_length=255,  db_index=True)
     general_group = models.CharField(max_length=255,  db_index=True)
     job_location = models.CharField(max_length=512,  db_index=True)
-    job_responsibilities = models.JSONField(
-        default=list, blank=True, db_index=True)
+    job_responsibilities = models.TextField(db_index=True)
     job_objectives = models.TextField(db_index=True)
     description = models.TextField(db_index=True)
     generated = models.TextField(db_index=True)
     objectives = models.TextField(db_index=True)
     skills = models.TextField(db_index=True)
     training = models.TextField(db_index=True)
-    job_requirements = models.JSONField(
-        default=list, blank=True, db_index=True)
+    job_requirements = models.TextField(db_index=True)
     created_at = models.DateTimeField(default=timezone.now, db_index=True)
 
     class Meta:
@@ -35,14 +33,19 @@ class Job(models.Model):
                 fields=[
                     'title', 'grade', 'group_type', 'general_group',
                     'job_location', 'job_responsibilities', 'job_objectives',
-                    'description', 'generated', 'objectives', 'skills', 'training',
+                    'job_requirements', 'description', 'generated', 'objectives', 'skills', 'training',
                 ]
             ),
         ]
 
-    @classmethod
+    @property
+    def code_str(self):
+        # reverse of codes r to l
+        return " - ".join(self.code[::-1])
+
+    @ classmethod
     def full_text_search(cls, query: str):
-        queryset = Q()
+        queryset=Q()
         for word in query.split():
             queryset |= Q(title__icontains=word)
             queryset |= Q(grade__icontains=word)
@@ -50,6 +53,7 @@ class Job(models.Model):
             queryset |= Q(general_group__icontains=word)
             queryset |= Q(job_location__icontains=word)
             queryset |= Q(job_responsibilities__icontains=word)
+            queryset |= Q(job_requirements__icontains=word)
             queryset |= Q(job_objectives__icontains=word)
             queryset |= Q(description__icontains=word)
             queryset |= Q(generated__icontains=word)
