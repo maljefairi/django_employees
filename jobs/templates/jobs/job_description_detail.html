@@ -2,8 +2,8 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h1>{{ job_description.job_title }}</h1>
-    <p class="lead">Job Descriptions Management - Details</p>
+    <h1 class="text-center">{{ job_description.job_title }}</h1>
+    <p class="lead text-center">Job Descriptions Management - Details</p>
     <hr>
 
     <div class="row mb-4">
@@ -36,9 +36,6 @@
                 <dt>Responsibilities:</dt>
                 <dd>{{ job_description.responsibilities }}</dd>
 
-                <dt>Objectives:</dt>
-                <dd>{{ job_description.objectives }}</dd>
-
                 <dt>Requirements:</dt>
                 <dd>{{ job_description.requirements }}</dd>
 
@@ -58,11 +55,41 @@
     </div>
     <hr>
 
+    <!-- Objectives Table -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <h3>Objectives:</h3>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Objective</th>
+                        <th>Weight (%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Assuming objectives are a list of dictionary containing 'name' and 'weight' -->
+                    {% for objective in job_description.objectives %}
+                        <tr>
+                            <td>{{ objective.name }}</td>
+                            <td>{{ objective.weight }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td><strong>Total</strong></td>
+                        <td>{{ job_description.objectives|length }}</td> <!-- Sum the weight if you have such data -->
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <hr>
+
     <div class="actions d-flex justify-content-between align-items-center">
         <a href="{% url 'job_description_list' %}" class="btn btn-secondary">
             <i class="fas fa-arrow-left"></i> Back to List
         </a>
-
         <div class="btn-group">
             <a href="{% url 'job_description_edit' job_description.id %}" class="btn btn-primary">
                 <i class="fas fa-edit"></i> Edit
