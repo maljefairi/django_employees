@@ -12,7 +12,7 @@ class Job(models.Model):
     code = models.JSONField(default=list, blank=True, db_index=True)
     group_type = models.CharField(max_length=255,  db_index=True)
     general_group = models.CharField(max_length=255,  db_index=True)
-    job_location = models.TextField(db_index=True)
+    job_location = models.CharField(max_length=512,  db_index=True)
     job_responsibilities = models.JSONField(
         default=list, blank=True, db_index=True)
     job_objectives = models.TextField(db_index=True)

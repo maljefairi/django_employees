@@ -21,7 +21,7 @@ def load_data():
                 description=item["description"],
                 defaults={
                     'grade': item["grade"],
-                    'code': ",".join(item["code"]),
+                    'code': item["code"],
                     'group_type': item["group_type"],
                     'general_group': item["general_group"],
                     'job_location': item["job_location"],

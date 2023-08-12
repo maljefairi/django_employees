@@ -5,10 +5,27 @@ from django.core.paginator import (
     EmptyPage,
     PageNotAnInteger
 )
+from django.views.generic.detail import DetailView
+from django.urls import reverse
 
 
 from .models import Job
 from .forms import JobForm, JobFilterForm
+
+
+class JobDescriptionDetailView(DetailView):
+    model = Job
+    template_name = 'jobs/job_description_detail.html'
+    context_object_name = 'job_description'
+    form_class = JobForm
+
+    def get_object(self):
+        return get_object_or_404(Job, pk=self.kwargs['pk'])
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = self.form_class(instance=self.get_object())
+        return context
 
 
 def job_description_list(request: HttpRequest):
