@@ -1,5 +1,5 @@
-{% load crispy_forms_tags %}
 {% extends "jobs/base.html" %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 <div class="container mt-5">
@@ -15,23 +15,7 @@
     <form method="post" role="form" class="mt-4">
         {% csrf_token %}
 
-        {% for field in form %}
-        <div class="form-group{% if field.errors %} has-error{% endif %}">
-            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-
-            {{ field|add_class:"form-control" }}
-
-            {% if field.help_text %}
-            <small id="{{ field.id_for_label }}-help" class="form-text text-muted">{{ field.help_text }}</small>
-            {% endif %}
-
-            {% for error in field.errors %}
-            <div class="alert alert-danger" role="alert">
-                {{ error }}
-            </div>
-            {% endfor %}
-        </div>
-        {% endfor %}
+        {{ form|crispy }}
 
         <div class="form-actions">
             <button type="submit" class="btn btn-primary">Save</button>
