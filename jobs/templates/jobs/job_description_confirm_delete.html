@@ -8,8 +8,8 @@
             <div class="card border-danger mb-3">
                 <div class="card-header bg-danger text-white">Confirm Deletion</div>
                 <div class="card-body">
-                    <p class="card-text">Are you sure you want to delete the job description for "
-                        <strong>{{ job_description.title }}</strong>"?
+                    <p class="card-text">
+                        Are you sure you want to delete the job description for "<strong>{{ queryset.title }}</strong>"?
                     </p>
                     <form method="post">
                         {% csrf_token %}

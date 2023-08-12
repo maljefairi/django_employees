@@ -46,16 +46,21 @@ def job_description_list(request: HttpRequest):
 
     paginator = Paginator(queryset, 100)
     page = request.GET.get('page')
+    start = 0
     try:
         job_descriptions = paginator.page(page)
+        start = (int(page) - 1) * 100
     except PageNotAnInteger:
         job_descriptions = paginator.page(1)
+        start = 0
     except EmptyPage:
         job_descriptions = paginator.page(paginator.num_pages)
+        start = (int(paginator.num_pages) - 1) * 100
 
     context = {
         'queryset': job_descriptions,
-        'form': form
+        'form': form,
+        'start': start
     }
 
     return render(request, 'jobs/job_description_list.html', context)
@@ -91,7 +96,7 @@ def job_description_delete(request: HttpRequest, pk):
     if request.method == "POST":
         queryset.delete()
         return redirect('job_description_list')
-    context = {'form': queryset}
+    context = {'queryset': queryset}
     return render(request, 'jobs/job_description_confirm_delete.html', context)
 
 
