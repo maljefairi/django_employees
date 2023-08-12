@@ -1,16 +1,6 @@
-from import_export import resources
-from import_export.admin import ImportExportModelAdmin
-from .models import Employee
+# admin.py 
 from django.contrib import admin
+from .models import JobTitle, JobDescription
 
-
-class EmployeeResource(resources.ModelResource):
-    class Meta:
-        model = Employee
-
-
-class EmployeeAdmin(ImportExportModelAdmin):
-    resource_class = EmployeeResource
-
-
-admin.site.register(Employee, EmployeeAdmin)
+admin.site.register(JobTitle)
+admin.site.register(JobDescription)
