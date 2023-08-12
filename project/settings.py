@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "jobs",
     "import_export",
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

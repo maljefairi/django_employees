@@ -1,66 +1,76 @@
 {% extends "jobs/base.html" %}
 
 {% block content %}
-<h1>Job Descriptions Management</h1>
-<h2>Job Description Details</h2>
+<div class="container mt-5">
+    <h1>{{ job_description.job_title }}</h1>
+    <p class="lead">Job Descriptions Management - Details</p>
+    <hr>
 
-<div>
-    <strong>Job title:</strong> {{ job_description.job_title }}
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <dl>
+                <dt>Job title:</dt>
+                <dd>{{ job_description.job_title }}</dd>
+
+                <dt>Grade:</dt>
+                <dd>{{ job_description.grade }}</dd>
+
+                <dt>Code:</dt>
+                <dd>{{ job_description.code }}</dd>
+
+                <dt>Group type:</dt>
+                <dd>{{ job_description.group_type }}</dd>
+
+                <dt>General group:</dt>
+                <dd>{{ job_description.general_group }}</dd>
+
+                <dt>Job location:</dt>
+                <dd>{{ job_description.job_location }}</dd>
+
+                <dt>Generated:</dt>
+                <dd>{{ job_description.generated }}</dd>
+            </dl>
+        </div>
+        <div class="col-md-6">
+            <dl>
+                <dt>Responsibilities:</dt>
+                <dd>{{ job_description.responsibilities }}</dd>
+
+                <dt>Objectives:</dt>
+                <dd>{{ job_description.objectives }}</dd>
+
+                <dt>Requirements:</dt>
+                <dd>{{ job_description.requirements }}</dd>
+
+                <dt>Description:</dt>
+                <dd>{{ job_description.description }}</dd>
+
+                <dt>Objectives Details:</dt>
+                <dd>{{ job_description.objectives_details }}</dd>
+
+                <dt>Skills:</dt>
+                <dd>{{ job_description.skills }}</dd>
+
+                <dt>Training:</dt>
+                <dd>{{ job_description.training }}</dd>
+            </dl>
+        </div>
+    </div>
+    <hr>
+
+    <div class="actions d-flex justify-content-between align-items-center">
+        <a href="{% url 'job_description_list' %}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Back to List
+        </a>
+
+        <div class="btn-group">
+            <a href="{% url 'job_description_edit' job_description.id %}" class="btn btn-primary">
+                <i class="fas fa-edit"></i> Edit
+            </a>
+            <a href="{% url 'job_description_delete' job_description.id %}" class="btn btn-danger">
+                <i class="fas fa-trash"></i> Delete
+            </a>
+        </div>
+    </div>
 </div>
-
-<div>
-    <strong>Grade:</strong> {{ job_description.grade }}
-</div>
-
-<div>
-    <strong>Code:</strong> {{ job_description.code }}
-</div>
-
-<div>
-    <strong>Group type:</strong> {{ job_description.group_type }}
-</div>
-
-<div>
-    <strong>General group:</strong> {{ job_description.general_group }}
-</div>
-
-<div>
-    <strong>Job location:</strong> {{ job_description.job_location }}
-</div>
-
-<div>
-    <strong>Job responsibilities:</strong> {{ job_description.responsibilities }}
-</div>
-
-<div>
-    <strong>Job objectives:</strong> {{ job_description.objectives }}
-</div>
-
-<div>
-    <strong>Job requirements:</strong> {{ job_description.requirements }}
-</div>
-
-<div>
-    <strong>Description:</strong> {{ job_description.description }}
-</div>
-
-<div>
-    <strong>Generated:</strong> {{ job_description.generated }}
-</div>
-
-<div>
-    <strong>Objectives:</strong> {{ job_description.objectives_details }}
-</div>
-
-<div>
-    <strong>Skills:</strong> {{ job_description.skills }}
-</div>
-
-<div>
-    <strong>Training:</strong> {{ job_description.training }}
-</div>
-
-<a href="{% url 'job_description_edit' job_description.id %}" class="btn btn-primary">Edit</a>
-<a href="{% url 'job_description_delete' job_description.id %}" class="btn btn-danger">Delete</a>
-<a href="{% url 'job_description_list' %}" class="btn btn-secondary">Back to List</a>
 {% endblock %}

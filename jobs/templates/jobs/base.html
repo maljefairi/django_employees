@@ -1,34 +1,36 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Descriptions Management</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Bootstrap CSS (RTL version for Arabic) -->
+    <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css">
+
+    <!-- Custom Styles -->
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <style>
-        .custom-container {
-            margin-left: auto;
-            margin-right: auto;
-            max-width: 85%;
-        }
-    </style>
 </head>
 
 <body>
     <header>
-        <h2 class="text-secondary text-center p-2" style="background-color:#e9ecef">Job Descriptions Management</h2>
+        <h2 class="text-secondary text-center p-2 bg-light">Job Descriptions Management</h2>
     </header>
 
-    <main class="container mt-3 custom-container">
+    <main class="container mt-5">
         {% block content %}
         {% endblock %}
     </main>
 
-    <!-- Any global scripts can be linked here -->
+    <!-- jQuery, Popper.js, and Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://cdn.rtlcss.com/bootstrap/v4.5.3/js/bootstrap.min.js"></script>
+
+    <!-- Custom Scripts -->
     <script src="{% static 'js/scripts.js' %}"></script>
 </body>
 

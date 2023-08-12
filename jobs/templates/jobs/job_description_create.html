@@ -1,14 +1,76 @@
-(extends "jobs/base.html" %)
-    
-    {% block content %}
-    <h1>{% if form.instance.id %}Edit{% else %}Create{% endif %} Job Description</h1>
+{% extends "jobs/base.html" %}
 
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save</button>
-    </form>
+{% block content %}
+<div class="container mt-5">
+    <h1>{{ job_description.job_title }}</h1>
+    <p class="lead">Job Descriptions Management - Details</p>
+    <hr>
 
-    <a href="{% url 'job_description_list' %}">Back to List</a>
-    {% endblock %}
-    
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <dl>
+                <dt>Job title:</dt>
+                <dd>{{ job_description.job_title }}</dd>
+
+                <dt>Grade:</dt>
+                <dd>{{ job_description.grade }}</dd>
+
+                <dt>Code:</dt>
+                <dd>{{ job_description.code }}</dd>
+
+                <dt>Group type:</dt>
+                <dd>{{ job_description.group_type }}</dd>
+
+                <dt>General group:</dt>
+                <dd>{{ job_description.general_group }}</dd>
+
+                <dt>Job location:</dt>
+                <dd>{{ job_description.job_location }}</dd>
+
+                <dt>Generated:</dt>
+                <dd>{{ job_description.generated }}</dd>
+            </dl>
+        </div>
+        <div class="col-md-6">
+            <dl>
+                <dt>Job responsibilities:</dt>
+                <dd>{{ job_description.responsibilities }}</dd>
+
+                <dt>Job objectives:</dt>
+                <dd>{{ job_description.objectives }}</dd>
+
+                <dt>Job requirements:</dt>
+                <dd>{{ job_description.requirements }}</dd>
+
+                <dt>Description:</dt>
+                <dd>{{ job_description.description }}</dd>
+
+                <dt>Objectives details:</dt>
+                <dd>{{ job_description.objectives_details }}</dd>
+
+                <dt>Skills:</dt>
+                <dd>{{ job_description.skills }}</dd>
+
+                <dt>Training:</dt>
+                <dd>{{ job_description.training }}</dd>
+            </dl>
+        </div>
+    </div>
+    <hr>
+
+    <div class="actions d-flex justify-content-between">
+        <a href="{% url 'job_description_list' %}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Back to List
+        </a>
+
+        <div class="btn-group">
+            <a href="{% url 'job_description_edit' job_description.id %}" class="btn btn-primary">
+                <i class="fas fa-edit"></i> Edit
+            </a>
+            <a href="{% url 'job_description_delete' job_description.id %}" class="btn btn-danger">
+                <i class="fas fa-trash"></i> Delete
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

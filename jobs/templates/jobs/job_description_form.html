@@ -1,13 +1,41 @@
 {% extends "jobs/base.html" %}
 
 {% block content %}
-<h1>{% if form.instance.id %}Edit{% else %}Create{% endif %} Job Description</h1>
+<div class="container mt-5">
+    <h1>
+        {% if form.instance.id %}
+            Edit
+        {% else %}
+            Create
+        {% endif %}
+        Job Description
+    </h1>
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save</button>
-</form>
+    <form method="post" role="form" class="mt-4">
+        {% csrf_token %}
 
-<a href="{% url 'job_description_list' %}">Back to List</a>
+        {% for field in form %}
+            <div class="form-group{% if field.errors %} has-error{% endif %}">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                
+                {{ field|add_class:"form-control" }}
+
+                {% if field.help_text %}
+                    <small id="{{ field.id_for_label }}-help" class="form-text text-muted">{{ field.help_text }}</small>
+                {% endif %}
+
+                {% for error in field.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a href="{% url 'job_description_list' %}" class="btn btn-secondary mt-2" role="button">Back to List</a>
+        </div>
+    </form>
+</div>
 {% endblock %}

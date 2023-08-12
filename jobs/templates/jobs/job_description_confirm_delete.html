@@ -1,13 +1,21 @@
 {% extends "jobs/base.html" %}
 
 {% block content %}
-<h1>Confirm Deletion</h1>
-<p>Are you sure you want to delete "{{ job_description.job_title }}"?</p>
-
-<form method="post">
-    {% csrf_token %}
-    <button type="submit">Yes, delete</button>
-</form>
-
-<a href="{% url 'job_description_list' %}">Back to List</a>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card border-danger mb-3">
+                <div class="card-header bg-danger text-white">Confirm Deletion</div>
+                <div class="card-body">
+                    <p class="card-text">Are you sure you want to delete the job description for "<strong>{{ job_description.job_title }}</strong>"?</p>
+                    <form method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Yes, delete</button>
+                        <a href="{% url 'job_description_list' %}" class="btn btn-secondary ml-2">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
