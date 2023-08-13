@@ -1,0 +1,42 @@
+# Sample docker-compose.yml file for a Node.js app
+# https://docs.docker.com/compose/gettingstarted/#step-3-define-services-in-a-compose-file
+
+version: '3'
+
+services:
+  frontend:
+    image: sidrachain/awqaf-jobs-fe:latest
+    container_name: frontend
+    restart: always
+
+  backend:
+    container_name: backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    volumes:
+      - awqaf-be-static:/app/static:rw
+    entrypoint: /app/scripts/entrypoint.dev.sh
+    restart: always
+
+    depends_on:
+      - redis
+
+  awqaf-be-proxy:
+    image: nginx:latest
+    ports:
+      - 8100:80
+    volumes:
+      - ./nginx/cloudflare-logs.conf:/etc/nginx/cloudflare-logs.conf:ro
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/logs:/var/log/nginx:rw
+      - awqaf-be-static:/var/www/html/static:ro
+
+    restart: always
+    depends_on:
+      - backend
+
+volumes:
+  awqaf-be-static:

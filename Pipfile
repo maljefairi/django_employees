@@ -19,6 +19,7 @@ drf-yasg = "*"
 openapi = "*"
 crispy-tailwind = "*"
 django-cors-headers = "*"
+django-environ = "*"
 
 [dev-packages]
 autopep8 = "*"
