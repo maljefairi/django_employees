@@ -13,6 +13,12 @@ ipython = "*"
 python-levenshtein = "*"
 django-crispy-forms = "*"
 crispy-bootstrap5 = "*"
+djangorestframework = "*"
+django-filter = "*"
+drf-yasg = "*"
+openapi = "*"
+crispy-tailwind = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 autopep8 = "*"

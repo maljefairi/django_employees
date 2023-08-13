@@ -37,27 +37,59 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
-
-    'crispy_forms',
-    "crispy_bootstrap5",
+    "corsheaders",
+    "crispy_forms",
+    "django_filters",
+    "rest_framework",
+    "crispy_tailwind",
+    'drf_yasg',
 
     "jobs",
 ]
 
-CRISPY_TEMPLATE_PACK = "bootstrap5"
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "tailwind"
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
+    "project.middleware.DisableCSRFMiddleware",
+    # "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
 ROOT_URLCONF = "project.urls"
+
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+]
+
+X_FRAME_OPTIONS = 'ALLOWALL'
+
+CORS_ALLOW_HEADERS = (
+    "accept",
+    "accept-encoding",
+    "accept-language",
+    "authorization",
+    "content-type",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+)
 
 TEMPLATES = [
     {
@@ -74,6 +106,15 @@ TEMPLATES = [
         },
     },
 ]
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    ),
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 100,
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+}
 
 WSGI_APPLICATION = "project.wsgi.application"
 
