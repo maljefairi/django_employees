@@ -27,7 +27,7 @@ services:
   awqaf-be-proxy:
     image: nginx:latest
     ports:
-      - 8100:80
+      - 8071:80
     volumes:
       - ./nginx/cloudflare-logs.conf:/etc/nginx/cloudflare-logs.conf:ro
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
