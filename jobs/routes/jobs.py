@@ -1,5 +1,6 @@
 from rest_framework import viewsets
 from rest_framework import serializers
+from rest_framework.permissions import IsAuthenticated
 from django_filters import rest_framework as drf_filters
 from jobs.models import Job
 
@@ -29,7 +30,7 @@ class JobSerializer(serializers.ModelSerializer):
     class Meta:
         model = Job
         fields = ('id',
-                  'title', 'grade', 'group_type', 'general_group','code',
+                  'title', 'grade', 'group_type', 'general_group', 'code',
                   'job_location', 'job_responsibilities', 'job_objectives',
                   'job_requirements', 'description', 'generated', 'objectives', 'skills', 'training', 'created_at')
         read_only_fields = ('id', 'created_at',)
@@ -40,5 +41,9 @@ class JobViewSet(viewsets.ModelViewSet):
     serializer_class = JobSerializer
     filterset_class = JobFilter
 
-
-
+    def get_permissions(self):
+        if self.action in ['list', 'retrieve']:
+            permission_classes = []
+        else:
+            permission_classes = [IsAuthenticated]
+        return [permission() for permission in permission_classes]

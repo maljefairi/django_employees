@@ -18,11 +18,10 @@ services:
       - .env
     volumes:
       - awqaf-be-static:/app/static:rw
+      - ./db.sqlite3:/app/db.sqlite3:rw
     entrypoint: /app/scripts/entrypoint.dev.sh
     restart: always
 
-    depends_on:
-      - redis
 
   awqaf-be-proxy:
     image: nginx:latest

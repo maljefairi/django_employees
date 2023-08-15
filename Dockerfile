@@ -30,7 +30,7 @@ COPY --chown=app:app . /app/
 EXPOSE 8000
 
 # Change to app user
-# USER app
+USER app
 
 # Run entrypoint.sh
 ENTRYPOINT ["/app/scripts/entrypoint.sh"]
