@@ -8,6 +8,9 @@ from jobs.models import Job
 RE_DASH_START = re.compile(r'^-')
 RE_WITH_NUMS = re.compile(r'\d+\.')
 RE_WITH_NUMS2 = re.compile(r'\d+\-')
+RE_WITH_NUMS3 = re.compile(r'\d+\)')
+RE_WITH_NUMS4 = re.compile(r'\d+\s+\)')
+RE_WITH_NUMS5 = re.compile(r'\d+\s+\.\s+')
 
 
 def clean_text(text: str):
@@ -28,6 +31,16 @@ def clean_text(text: str):
         elif RE_WITH_NUMS2.search(line):
             line = RE_WITH_NUMS2.sub('', line)
             lines.append(line.strip())
+        elif RE_WITH_NUMS3.search(line):
+            line = RE_WITH_NUMS3.sub('', line)
+            lines.append(line.strip())
+        elif RE_WITH_NUMS4.search(line):
+            line = RE_WITH_NUMS4.sub('', line)
+            lines.append(line.strip())
+        elif RE_WITH_NUMS5.search(line):
+            line = RE_WITH_NUMS5.sub('', line)
+            lines.append(line.strip())
+
     if len(lines) < 2:
         return text
     return "\n".join(lines)
@@ -70,7 +83,7 @@ class Command(BaseCommand):
             for r in item["job_requirements"]:
                 requirements += f'{r["degree"]} ({r["experience"]})\n'
 
-            job_description_instance, created = Job.objects.get_or_create(
+            instance, created = Job.objects.update_or_create(
                 title=item["job_title"],
                 description=clean_text(item["description"]),
                 defaults={
@@ -88,20 +101,10 @@ class Command(BaseCommand):
                     'training': clean_text(item["training"])
                 }
             )
-
             if created:
                 total_added += 1
             else:
-                # Update the existing instance with any missing or new data
-                # Add fields to be updated as required
-                updated = False
-                for key, value in item.items():
-                    if not getattr(job_description_instance, key, None):
-                        setattr(job_description_instance, key, value)
-                        updated = True
-                if updated:
-                    total_updated += 1
-                    job_description_instance.save()
+                total_updated += 1
 
         total_available = Job.objects.count()
         self.stdout.write(self.style.HTTP_INFO(
