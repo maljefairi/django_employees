@@ -6,7 +6,8 @@ from jobs.models import Job
 
 
 RE_DASH_START = re.compile(r'^-')
-RE_WITH_NUMS = re.compile(r'\d+\.\s')
+RE_WITH_NUMS = re.compile(r'\d+\.')
+RE_WITH_NUMS2 = re.compile(r'\d+\-')
 
 
 def clean_text(text: str):
@@ -16,13 +17,18 @@ def clean_text(text: str):
     lines = []
     for line in text.splitlines():
         line = line.strip()
+        if line == '':
+            continue
         if RE_WITH_NUMS.search(line):
             line = RE_WITH_NUMS.sub('', line)
             lines.append(line.strip())
         elif RE_DASH_START.search(line):
             line = RE_DASH_START.sub('', line)
             lines.append(line.strip())
-    if len(lines) > 1:
+        elif RE_WITH_NUMS2.search(line):
+            line = RE_WITH_NUMS2.sub('', line)
+            lines.append(line.strip())
+    if len(lines) < 2:
         return text
     return "\n".join(lines)
 
@@ -66,7 +72,7 @@ class Command(BaseCommand):
 
             job_description_instance, created = Job.objects.get_or_create(
                 title=item["job_title"],
-                description=item["description"],
+                description=clean_text(item["description"]),
                 defaults={
                     'grade': item["grade"],
                     'code': item["code"],
