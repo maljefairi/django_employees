@@ -11,9 +11,9 @@ class JobFilter(drf_filters.FilterSet):
         fields = {
             'title': ['icontains'],
             'grade': ['exact'],
-            'group_type': ['exact'],
+            'group_type': ['icontains'],
             'general_group': ['exact'],
-            'job_location': ['exact'],
+            'job_location': ['icontains'],
             'job_responsibilities': ['icontains'],
             'job_objectives': ['icontains'],
             'job_requirements': ['icontains'],
