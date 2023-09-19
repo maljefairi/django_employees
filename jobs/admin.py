@@ -11,3 +11,10 @@ class JobAdmin(admin.ModelAdmin):
     search_fields = ('title', 'grade', 'group_type', 'general_group', 'job_location', 'job_responsibilities',
                      'job_objectives', 'job_requirements', 'description', 'generated', 'objectives', 'skills', 'training', 'created_at')
     readonly_fields = ('created_at',)
+    actions = ['clone']
+
+    def clone(self, request, queryset):
+        for object in queryset:
+            object.id = None
+            object.save()
+    clone.short_description = "Clone selected record"

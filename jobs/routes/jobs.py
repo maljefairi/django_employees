@@ -2,6 +2,7 @@ from rest_framework import viewsets
 from rest_framework import serializers
 from rest_framework.permissions import IsAuthenticated
 from django_filters import rest_framework as drf_filters
+from rest_framework.response import Response
 from jobs.models import Job
 
 
@@ -47,3 +48,9 @@ class JobViewSet(viewsets.ModelViewSet):
         else:
             permission_classes = [IsAuthenticated]
         return [permission() for permission in permission_classes]
+
+
+class JobLocationsView(viewsets.ViewSet):
+
+    def list(self, request):
+        return Response(Job.objects.order_by().values_list('job_location', flat=True).distinct())
