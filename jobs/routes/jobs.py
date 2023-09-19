@@ -14,7 +14,7 @@ class JobFilter(drf_filters.FilterSet):
             'grade': ['exact'],
             'group_type': ['icontains'],
             'general_group': ['exact'],
-            'job_location': ['icontains'],
+            'job_location': ['exact'],
             'job_responsibilities': ['icontains'],
             'job_objectives': ['icontains'],
             'job_requirements': ['icontains'],
